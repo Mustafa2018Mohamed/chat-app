@@ -1,0 +1,94 @@
+<ion-header no-shadow no-border>
+
+  <ion-navbar transparent style="color:white">
+    <ion-title>{{data?.firstName}} Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding >
+	<div class="overlay" style=""></div>
+	<div class="background-back" [ngStyle]="{'background-image': 'url(' + data.profilePicUrl + ')'}">
+	</div>
+
+	<div>
+		<div>
+			<ion-item class="img-container transparent-item" no-lines >
+				<ion-avatar>
+					<img (tap)="openOptions()" [src]="data?.profilePicUrl" alt="Profile Picture" *ngIf="data.profilePicUrl">
+				</ion-avatar>
+			</ion-item>
+			<h2 class="full-name">{{data?.firstName}} {{data?.lastName}}</h2>
+			
+		</div>
+		<form #form="ngForm">
+			<h4 class="email">Email : {{data?.email}}</h4>
+			<ion-list>
+				<ion-item class="transparent-item form-item">
+			   		<ion-label color="primary">First Name</ion-label>
+			    	<ion-input required [disabled]="anotherUser" maxlength="15" minlength="3" ngModel #firstName="ngModel" [(ngModel)]="data.firstName" name="firstName" type="text"></ion-input>
+				</ion-item>
+				<div *ngIf="firstName.touched && firstName.invalid" class="error-item">
+					<div *ngIf="firstName.errors.minlength">You Need 
+					{{firstName.errors.minlength.requiredLength - firstName.errors.minlength.actualLength}} More Character
+					</div>
+					<div *ngIf="firstName.errors.required">This Fiels Is Requird</div>
+				</div>
+
+				<ion-item class="transparent-item form-item">
+			   		<ion-label color="primary">Last Name</ion-label>
+			    	<ion-input required [disabled]="anotherUser" maxlength="15" minlength="3" #lastName="ngModel" name="lastName" ngModel [(ngModel)]="data.lastName" type="text"></ion-input>
+				</ion-item>
+
+				<div class="error-item" *ngIf="lastName.touched && lastName.invalid">
+					<div *ngIf="lastName.errors.minlength">You Need 
+					{{lastName.errors.minlength.requiredLength - lastName.errors.minlength.actualLength}} More Character
+					</div>
+					<div *ngIf="lastName.errors.required">This Fiels Is Requird</div>
+				</div>
+
+				<ion-item class="transparent-item form-item">
+			   		<ion-label>Date Of Birth</ion-label>
+			  		<ion-datetime #dateOfBirth="ngModel" required [disabled]="anotherUser" max="2005" displayFormat="MM/DD/YYYY" name="dateOfBirth" ngModel [(ngModel)]="data.dateOfBirth"></ion-datetime>
+				</ion-item>
+				<div class="error-item" *ngIf="dateOfBirth.touched && dateOfBirth.invalid">
+				   <div *ngIf="dateOfBirth.errors.required">This Fiels Is Requird</div>
+				</div>
+
+				<ion-item class="transparent-item location form-item" no-lines style="width: 50%;" >
+				  <ion-label>
+				  	 <ion-icon ios="md-locate" md="md-locate"></ion-icon>
+				  </ion-label>
+				  <ion-select #country="ngModel" required name="country" [disabled]="anotherUser" [(ngModel)]="data.country" ngModel >
+				    <ion-option *ngFor="let countryName of country_list" [value]="countryName">{{countryName}}</ion-option>
+				  </ion-select>
+				</ion-item>
+				<div class="error-item" *ngIf="country.touched && country.invalid">
+				   <div *ngIf="country.errors.required">This Fiels Is Requird</div>
+				</div>
+			</ion-list>
+			<div class="buttons-container">
+				<ion-item class="transparent-item" style="width: 50%; margin: auto;" *ngIf="!anotherUser" no-lines>
+					<button style="width:100%" ion-button [disabled]="form.erros" color="Aqua" outline item-end (tap)="saveInfo(form.value)">Save</button>
+				</ion-item>
+
+				<ion-item class="transparent-item" style="width: 50%; margin: auto;" no-lines>
+					<button style="width:100%" ion-button (click)="logOut()" color="danger">log out </button>
+				</ion-item>
+			</div>
+		</form>
+	</div>	
+</ion-content>
+
+
+<!-->
+	<div *ngIf="!anotherUser" class="photo-buttons">
+		<button class="camera-button" ion-button icon-only (click)="takePhoto()" color="camera">
+		  <ion-icon name="ios-camera"></ion-icon>
+		</button>
+		<button class="image-button" ion-button icon-only (click)="uploadPhoto()" color="photo">
+		  <ion-icon name="md-image"></ion-icon>
+		</button>
+	</div>
+<!-->

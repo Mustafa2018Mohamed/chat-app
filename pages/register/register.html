@@ -1,0 +1,90 @@
+<ion-header no-shadow no-border>
+
+  <ion-navbar >
+    
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+	<ion-item no-lines class="head">
+		<h2>Please Fill Those Fields</h2>
+	</ion-item>
+	<form #form="ngForm" >
+		<ion-list>
+			<div class="fullName-wrapper">
+				<ion-item style="margin-right: 0%;">
+				  <ion-input maxlength="15" minlength="3" placeholder="First Name" type="text" autofocus ngModel #firstName="ngModel" name="firstName" required></ion-input>
+				</ion-item>
+				
+
+				<ion-item style="margin-left: 3%;">
+				  <ion-input maxlength="15" minlength="3" placeholder="Last Name" ngModel #lastName="ngModel" name="lastName" required></ion-input>
+				</ion-item>
+				<div *ngIf="firstName.touched && firstName.invalid && !firstName.pristine" class="error-item">
+					<div *ngIf="firstName.errors.minlength">Just 
+					{{firstName.errors.minlength.requiredLength - firstName.errors.minlength.actualLength}} More Characters
+					</div>
+					<div *ngIf="firstName.errors.required">This Fiels Is Requird</div>
+				</div>
+				<div style="margin-left: 3%;" *ngIf="lastName.touched && lastName.invalid" class="error-item">
+					<div *ngIf="lastName.errors.minlength">Just
+					{{lastName.errors.minlength.requiredLength - lastName.errors.minlength.actualLength}} More Characters
+					</div>
+					<div *ngIf="lastName.errors.required">This Fiels Is Requird</div>
+				</div>
+			</div>
+
+			<ion-item>
+			  <ion-label>Date Of Birth</ion-label>
+			  <ion-datetime max="2005" displayFormat="MM/DD/YYYY" #dateOfBirth="ngModel" ngModel name="dateOfBirth" required></ion-datetime>
+			</ion-item>
+			<div class="error-item" *ngIf="dateOfBirth.touched && dateOfBirth.invalid">
+			   <div *ngIf="dateOfBirth.errors.required">This Fiels Is Requird</div>
+			</div>
+
+			<ion-item>
+			  <ion-label>Select Country</ion-label>
+			  <ion-select name="country" #can="ngModel" [(ngModel)]="country" ngModel required>
+			    <ion-option *ngFor="let country of country_list" [value]="country">{{country}}
+			    </ion-option>
+			  </ion-select>
+			</ion-item>
+			<div class="error-item" *ngIf="can.touched && can.invalid">
+			   <div *ngIf="can.errors.required">This Fiels Is Requird</div>
+			</div>
+
+			<ion-item>
+			  <ion-label color="grey" floating>Email</ion-label>
+			  <ion-input maxlength="20" minlength="8" type="email" min="12" ngModel name="email" #email="ngModel" required></ion-input>
+			</ion-item>
+			<div *ngIf="email.touched && email.invalid" class="error-item">
+				<div *ngIf="email.errors.minlength">You Need 
+				{{email.errors.minlength.requiredLength - email.errors.minlength.actualLength}} More Character
+				</div>
+				<div *ngIf="email.errors.required">This Fiels Is Requird</div>
+			</div>
+
+			<ion-item>
+			  <ion-label color="grey" floating>Password</ion-label>
+			  <ion-input maxlength="12" minlength="6" type="password" min="6" ngModel name="password" #password="ngModel" required></ion-input>
+			</ion-item>
+			<div *ngIf="password.touched && password.invalid" class="error-item">
+				<div *ngIf="password.errors.minlength">You Need 
+				{{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} More Character
+				</div>
+				<div *ngIf="password.errors.required">This Fiels Is Requird</div>
+			</div>
+
+			<ion-item class="photo-buttons" no-lines>
+				<button ion-button icon-only (tap)="takePhoto()" color="camera">
+				  <ion-icon name="ios-camera"></ion-icon>
+				</button>
+				<button ion-button icon-only (tap)="uploadPhoto()" color="photo">
+				  <ion-icon name="md-image"></ion-icon>
+				</button>
+			</ion-item>
+			<button [disabled]="form.errors || !form.touched || form.invalid || !photo" class="submit" ion-button color="primary" (tap)="registerUser(form.value)"> Register</button>
+		</ion-list>
+	</form>
+	
+</ion-content>

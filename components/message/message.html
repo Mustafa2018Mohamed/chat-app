@@ -1,0 +1,15 @@
+<ng-container *ngIf="message.sender.uid == myId; else rightContainer">
+		<ion-item (press)="clickMessage($event)" text-wrap class="left-message" color="primary">
+			<span>{{message.content}}</span>
+			<span text-end class="time"> {{ getSendTime(message.time) }} </span>
+		</ion-item>
+</ng-container>
+
+<ng-template #rightContainer>
+	<ng-container>
+		<ion-item (press)="clickMessage($event)" text-wrap class="right-message" color="secondary">
+			<span>{{message.content}}</span>
+			<span text-end class="time"> {{ getSendTime(message.time) }}</span>
+		</ion-item>
+	</ng-container>
+</ng-template>

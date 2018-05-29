@@ -1,0 +1,35 @@
+<!--
+  Generated template for the InboxPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title  text-center>Inbox</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-list >
+	  <ion-item *ngFor="let chat of chatsArr" (click)="chatUser(chat)" (press)="chatOptions($event,chat)">
+	      <ion-avatar item-start>
+	        <img *ngIf="chat.userToChatInfo.profilePicUrl" [src]="chat.userToChatInfo.profilePicUrl" width="60" height="60">
+	      </ion-avatar>
+	      <h2>
+	      	<ion-grid no-padding>
+				<ion-row  no-padding>
+					<span  no-padding col-10>{{chat.userToChatInfo.firstName}} {{chat.userToChatInfo.lastName}}</span>
+					<span style="font-size: 13px;padding: 1px 0; text-align: right" no-padding col-2>{{ getSendTime(chat.time) }}</span>
+				</ion-row>
+			</ion-grid>		
+	      </h2>
+	      <p style="font-family: 'Indie Flower','Courgette' ,'El Messiri', cursive;">
+		    {{chat.content}}
+		  </p>
+	  </ion-item>
+	</ion-list>
+</ion-content>

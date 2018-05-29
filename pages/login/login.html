@@ -1,0 +1,42 @@
+<ion-content padding>
+	<ion-item class="item-head">
+		<ion-avatar>
+			<img src="../../assets/imgs/chat-512.png">
+		</ion-avatar>
+		<h2>Welcome To Chattos</h2>
+	</ion-item>
+	<form #form="ngForm">
+	    <ion-list>
+			<ion-item>
+			  	<ion-label color="primary" class="input-label" fixed>
+					<ion-icon name="mail"></ion-icon>
+			  	</ion-label>
+	    		<ion-input class="input" maxlength="20" minlength="8" ngModel #email="ngModel" name="email" type="email" required></ion-input>
+			</ion-item>
+			<div *ngIf="email.touched && email.invalid" class="error-item">
+				<div *ngIf="email.errors.minlength">You Need 
+				{{email.errors.minlength.requiredLength - email.errors.minlength.actualLength}} More Character
+				</div>
+				<div *ngIf="email.errors.required">This Fiels Is Requird</div>
+			</div>
+
+			<ion-item>
+			  	<ion-label color="primary" class="input-label" fixed>
+			  	 	  <ion-icon name="md-lock"></ion-icon>
+			  	</ion-label>
+	    		<ion-input class="input" maxlength="12" minlength="6" name="password" ngModel #password="ngModel" type="password" required></ion-input>
+			</ion-item>
+			<div *ngIf="password.touched && password.invalid" class="error-item">
+				<div *ngIf="password.errors.minlength">You Need 
+				{{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} More Character
+				</div>
+				<div *ngIf="password.errors.required">This Fiels Is Requird</div>
+			</div>
+			
+	  		<ion-item no-lines class="item-buttons" no-border text-center>
+				<button class="login-button" ion-button (tap)="login(form.value)" [disabled]="form.invalid || !form.value || form.pristine || form.errors || form.untouched || !email.value || !password.value">Login</button>
+				<button color="reg" ion-button class="register-button" navPush="RegisterPage">Register</button>
+			</ion-item>
+		</ion-list>
+	</form>
+</ion-content>

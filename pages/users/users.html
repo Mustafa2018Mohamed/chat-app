@@ -1,0 +1,30 @@
+<!--
+  Generated template for the UsersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title  text-center>Users</ion-title>
+    <ion-buttons end>
+    	<button ion-button (click)="openSearchPage()" icon-only>
+    		 <ion-icon name="ios-search" ></ion-icon>
+    	</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-list>
+		<ion-item style="width: fit-content;" *ngFor="let user of users" (click)="chatUser(user)">
+			<ion-avatar item-start>
+				<img *ngIf="user.profilePicUrl" [src]="user.profilePicUrl" alt="Profie Pic">
+			</ion-avatar>
+			<h2> {{user.firstName}} {{user.lastName}}</h2>
+    </ion-item>
+	</ion-list>
+</ion-content>

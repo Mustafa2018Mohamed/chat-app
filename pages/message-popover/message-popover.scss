@@ -1,0 +1,22 @@
+page-message-popover {
+	font-family: 'Courgette','Indie Flower','El Messiri', cursive;
+	
+	ion-list.list-md{
+		margin: -1px 0 0px;
+		
+		ion-item:first-child{
+			min-height: fit-content;
+    		max-height: fit-content;
+		}
+		
+		div.input-wrapper{
+			min-height: fit-content;
+    		max-height: fit-content;
+			
+			ion-label.label-md{
+				margin: 2px 8px 1px 0;
+			}
+		}
+		
+	}
+}
