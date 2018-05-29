@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App, LoadingController, ToastController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, LoadingController, ToastController, ActionSheetOptions, ActionSheetController} from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { UserAuthProvider } from '../../providers/user-auth/user-auth';
 import { LoginPage } from '../login/login';
@@ -24,12 +24,13 @@ export class ViewProfilePage {
   constructor(
     public  navCtrl: NavController,
     public  navParams: NavParams,
-  	private userAuth: UserAuthProvider,
+    private userAuth: UserAuthProvider,
     private usersDb:UsersDatabaseProvider,
-  	private app:App,
+    private app:App,
     private loading:LoadingController,
     private camera :Camera,
     private toast: ToastController,
+    private actionSheet: ActionSheetController,
     private photoViewer:PhotoViewer) {
   }
 
@@ -83,6 +84,7 @@ export class ViewProfilePage {
         actionSheetAnotherUserOpts:ActionSheetOptions = {
            buttons:[
             {
+	      text:'See Profile Photo',
               icon:'md-eye',
               handler:()=> this.photoViewer.show(this.data.profilePicUrl ,'', {share:false})
             }
